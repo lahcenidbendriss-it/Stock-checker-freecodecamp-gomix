@@ -5,7 +5,7 @@
   "main": "InfoSec project for freeCodeCamp",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon --tls-min-v1.2 server.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

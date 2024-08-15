@@ -1,7 +1,18 @@
-const mongoose = require("mongoose");
-const db = mongoose.connect(process.env.DB, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
+const mongoose = require('mongoose');
 
-module.exports = db;
+const dbUri = process.env.DB;
+
+if (!dbUri) {
+  throw new Error('No database URI found in environment variables.');
+}
+
+mongoose.connect(dbUri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  tls: true,
+  tlsAllowInvalidCertificates: false
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('Could not connect to MongoDB', err));
+
+module.exports = mongoose;
